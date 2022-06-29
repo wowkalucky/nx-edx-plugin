@@ -45,18 +45,48 @@ It is installed to LMS or/and CMS as a dependency.
 It exposes an API for its frontend application(s).
 It uses built frontend application(s) as its "static".
 
+> There must be a custom Nx plugin for the python/Django part generation.
+
 ### Frontend SPA
 
-Modifies, substitutes or extends OeX Platform's pieces of UI.
-It is built and put inside the OeX Platform plugin
+It modifies, substitutes, or extends OeX Platform's pieces of UI.
+It is built and put inside the OeX Platform plugin.
+
+> There must be a custom Nx plugin for the React/Redux part generation.
+
+Options:
+
+- add routing
+- add forms
+
+### Usage
+
+> There must be implemented a custom `edx-plugin` [workspace generator][nx-ws-generator].
+
+Workspace generator allows an initialization of a new OeX Platform plugin with an optional progressive frontend SPA + its API.
+
+```bash
+# generates a simple "classic" plugin:
+nx workspace-generator edx-plugin
+
+# generates a "progressive" plugin:
+nx workspace-generator edx-plugin --preset=react
+
+# generates another frontend SPA next to already existed:
+nx generate @rg/react:app my-new-app
+```
 
 ## Glossary
 
-- `workspace`
+- `workspace` - a set of projects
+- `preset` - an option for a new workspace
 - `project`
+- `app` - uses libs, implements features
+- `lib` - common code (UI components, utils, etc.)
 - `target`
-- `executor`
-- `generator`
+- `plugin` - extends workspace capabilities (includes generators and executors)
+- `generator` - automate making changes to the file system
+- `executor` - define how to perform an action on a project
 
 ---
 
@@ -65,3 +95,4 @@ It is built and put inside the OeX Platform plugin
 [React]: https://reactjs.org
 [Redux]: https://redux.js.org
 [Nx]: https://nx.dev/
+[nx-ws-generator]: https://nx.dev/generators/workspace-generators#workspace-generators
